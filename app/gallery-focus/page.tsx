@@ -1,138 +1,250 @@
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 
 export default function GalleryFocus() {
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans">
+    <div className="min-h-screen bg-stone-50 text-stone-800 font-sans">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white border-b border-green-100">
-        <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-green-600" />
-            <span className="text-sm font-medium text-slate-700">Theresa Kennish Art</span>
-          </div>
-          <div className="flex items-center gap-10 text-sm">
-            <a href="#featured" className="text-slate-600 hover:text-green-600 transition-colors">
-              Featured
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-stone-100">
+        <div className="max-w-[1600px] mx-auto px-8 h-20 flex items-center justify-between">
+          <Link href="/" className="text-xl font-medium tracking-tight">
+            Theresa Kennish
+          </Link>
+          <div className="hidden md:flex gap-12 text-sm font-medium text-stone-500">
+            <a
+              href="#current"
+              className="hover:text-stone-900 transition-colors"
+            >
+              Current
             </a>
-            <a href="#collection" className="text-slate-600 hover:text-green-600 transition-colors">
-              Collection
+            <a
+              href="#portfolio"
+              className="hover:text-stone-900 transition-colors"
+            >
+              Portfolio
             </a>
-            <a href="#contact" className="text-slate-600 hover:text-green-600 transition-colors">
+            <a
+              href="#contact"
+              className="hover:text-stone-900 transition-colors"
+            >
               Contact
             </a>
           </div>
-          <Link href="/" className="text-sm text-slate-400 hover:text-slate-600 transition-colors">
-            Back
-          </Link>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="h-screen flex items-center">
-        <div className="w-full max-w-7xl mx-auto px-8 grid grid-cols-2 gap-16 items-center">
-          {/* Left: Larger Rectangular Profile Image */}
-          <div className="flex justify-center">
-            <div className="w-96 h-96 bg-gradient-to-br from-green-100 to-emerald-50 rounded-lg shadow-xl flex items-center justify-center">
-              <svg className="w-40 h-40 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
-                <circle cx="12" cy="8" r="4" />
-                <path d="M12 14c-6 0-8 3-8 3v6h16v-6s-2-3-8-3z" />
-              </svg>
-            </div>
+      {/* Hero Section (Updated: Bio/Name focus, not featured series) */}
+      <section className="pt-32 pb-20 px-8 max-w-[1600px] mx-auto min-h-[80vh] flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-7 relative h-[60vh] min-h-[500px] rounded-sm overflow-hidden bg-stone-200">
+            <Image
+              src="/artwork/waves1.png"
+              alt="Theresa Kennish Art"
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
-
-          {/* Right: Artist Information */}
-          <div className="space-y-6">
-            <div>
-              <p className="text-sm text-green-600 font-medium mb-3 uppercase tracking-wide">
-                Photography & Contemporary Art
-              </p>
-              <h1 className="text-5xl font-light leading-tight mb-2">Theresa Kennish</h1>
-              <p className="text-lg text-green-600 font-light">Contemporary Mixed Media Artist</p>
-            </div>
-
-            <p className="text-slate-600 leading-relaxed max-w-lg text-base">
-              Theresa explores the intersection of traditional techniques and digital innovation, creating immersive
-              experiences that challenge perceptions of space and form. Her work has been featured in galleries across
-              the Pacific Northwest.
+          <div className="lg:col-span-5 space-y-8">
+            <h1 className="text-5xl md:text-6xl font-normal leading-tight text-stone-900">
+              Theresa Kennish
+            </h1>
+            <p className="text-xl text-stone-600 leading-relaxed max-w-md">
+              A contemporary artist exploring the textures of the natural world
+              through oil, photography, and mixed media.
             </p>
-
-            <button className="mt-8 px-8 py-3 bg-green-600 text-white font-light hover:bg-green-700 transition-colors">
-              View Current Work
-            </button>
+            <div className="flex gap-6 pt-4">
+              <a
+                href="#portfolio"
+                className="px-8 py-3 bg-stone-900 text-white text-sm font-medium hover:bg-stone-800 transition-colors"
+              >
+                View Portfolio
+              </a>
+              <a
+                href="#contact"
+                className="px-8 py-3 border border-stone-300 text-stone-600 text-sm font-medium hover:border-stone-900 hover:text-stone-900 transition-colors"
+              >
+                Contact
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Section */}
-      <section className="max-w-7xl mx-auto px-8 py-24 border-t border-green-100" id="featured">
-        <h3 className="text-2xl font-light mb-12 text-slate-900">Featured Work</h3>
-        <div className="grid grid-cols-2 gap-8 mb-8">
-          <div className="aspect-video bg-gradient-to-br from-emerald-100 via-green-50 to-teal-50 rounded-lg shadow-md" />
-          <div className="aspect-video bg-gradient-to-bl from-green-100 to-emerald-50 rounded-lg shadow-md" />
-        </div>
-        <div className="grid grid-cols-4 gap-6">
-          <div className="aspect-square bg-gradient-to-br from-teal-100 to-green-100 rounded-lg shadow-sm" />
-          <div className="aspect-square bg-gradient-to-br from-green-100 to-emerald-50 rounded-lg shadow-sm" />
-          <div className="aspect-square bg-gradient-to-br from-emerald-100 to-teal-50 rounded-lg shadow-sm" />
-          <div className="aspect-square bg-gradient-to-br from-green-50 to-emerald-100 rounded-lg shadow-sm" />
+      {/* Current Series Section */}
+      <section
+        id="current"
+        className="max-w-[1600px] mx-auto px-8 py-32 border-t border-stone-200"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="order-2 md:order-1 space-y-6">
+            <span className="text-xs font-bold tracking-widest uppercase text-stone-400">
+              Current Series
+            </span>
+            <h2 className="text-3xl font-normal text-stone-900">
+              Coastal Rhythms
+            </h2>
+            <p className="text-stone-600 leading-relaxed">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <Link
+              href="/series/coastal-rhythms"
+              className="inline-block text-stone-900 border-b border-stone-900 pb-1 hover:text-stone-600 hover:border-stone-600 transition-colors"
+            >
+              Oil on Canvas • 2024{" "}
+            </Link>
+          </div>
+          <div className="order-1 md:order-2 relative aspect-square bg-stone-100">
+            <Image
+              src="/artwork/surf1.JPG"
+              alt="Current Series"
+              fill
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 
-      {/* Collection Section */}
-      <section className="max-w-7xl mx-auto px-8 py-24 border-t border-green-100" id="collection">
-        <div className="mb-12">
-          <h3 className="text-2xl font-light mb-4 text-slate-900">Complete Collection</h3>
-          <p className="text-slate-600 text-sm leading-relaxed max-w-2xl">
-            Explore my past works and click to view each series. Discover the stories and inspirations behind my
-            complete collection of artistic works.
-          </p>
+      {/* Portfolio Grid (Renamed from Collections) */}
+      <section
+        className="max-w-[1600px] mx-auto px-8 py-32 border-t border-stone-200"
+        id="portfolio"
+      >
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <div>
+            <h2 className="text-3xl font-normal text-stone-900 mb-4">
+              Portfolio
+            </h2>
+            <p className="text-stone-500 max-w-md leading-relaxed">
+              Selected works organized by thematic exploration.
+            </p>
+          </div>
+          <div className="hidden md:block w-32 h-px bg-stone-300" />
         </div>
-        <div className="grid grid-cols-3 gap-6 mb-6">
-          <div className="aspect-square bg-gradient-to-br from-emerald-100 to-teal-100 rounded-lg shadow-md" />
-          <div className="aspect-square bg-gradient-to-br from-green-100 to-emerald-50 rounded-lg shadow-md" />
-          <div className="aspect-square bg-gradient-to-br from-teal-100 to-green-50 rounded-lg shadow-md" />
-        </div>
-        <div className="grid grid-cols-2 gap-6 mb-6">
-          <div className="aspect-square bg-gradient-to-br from-green-50 to-teal-100 rounded-lg shadow-md" />
-          <div className="aspect-square bg-gradient-to-br from-emerald-100 via-green-50 to-teal-50 rounded-lg shadow-md" />
-        </div>
-        <div className="grid grid-cols-4 gap-6">
-          <div className="aspect-square bg-gradient-to-br from-teal-100 to-green-100 rounded-lg shadow-sm" />
-          <div className="aspect-square bg-gradient-to-br from-green-100 to-teal-50 rounded-lg shadow-sm" />
-          <div className="aspect-square bg-gradient-to-br from-emerald-50 to-green-100 rounded-lg shadow-sm" />
-          <div className="aspect-square bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg shadow-sm" />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+          {/* Series Card 1 */}
+          <Link
+            href="/series/coastal-rhythms"
+            className="group block cursor-pointer"
+          >
+            <div className="aspect-[4/5] relative overflow-hidden bg-stone-100 mb-6">
+              <Image
+                src="/artwork/surf1.JPG"
+                alt="Coastal Rhythms"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <h3 className="text-xl font-medium text-stone-900 mb-1 group-hover:text-stone-600 transition-colors">
+              Coastal Rhythms
+            </h3>
+            <p className="text-stone-500 text-sm">Oil on Canvas • 2023</p>
+          </Link>
+
+          {/* Series Card 2 */}
+          <Link
+            href="/series/oceanic-horizons"
+            className="group block cursor-pointer"
+          >
+            <div className="aspect-[4/5] relative overflow-hidden bg-stone-100 mb-6">
+              <Image
+                src="/artwork/minimal_geometric.png"
+                alt="Oceanic Horizons"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <h3 className="text-xl font-medium text-stone-900 mb-1 group-hover:text-stone-600 transition-colors">
+              Oceanic Horizons
+            </h3>
+            <p className="text-stone-500 text-sm">Mixed Media • 2024</p>
+          </Link>
+
+          {/* Series Card 3 */}
+          <Link
+            href="/series/urban-echoes"
+            className="group block cursor-pointer"
+          >
+            <div className="aspect-[4/5] relative overflow-hidden bg-stone-100 mb-6">
+              <Image
+                src="/artwork/ocean_city.jpg"
+                alt="Urban Echoes"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <h3 className="text-xl font-medium text-stone-900 mb-1 group-hover:text-stone-600 transition-colors">
+              Urban Echoes
+            </h3>
+            <p className="text-stone-500 text-sm">Photography • 2022</p>
+          </Link>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-green-100 bg-green-50" id="contact">
-        <div className="max-w-7xl mx-auto px-8 py-16">
-          <div className="grid grid-cols-3 gap-12 mb-12">
-            <div>
-              <p className="text-xs uppercase tracking-widest text-green-600 font-semibold mb-3">Email</p>
-              <a href="mailto:theresa@kennishart.com" className="text-slate-900 hover:text-green-600 transition-colors">
-                theresa@kennishart.com
-              </a>
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-widest text-green-600 font-semibold mb-3">Follow</p>
+      <footer className="bg-white border-t border-stone-200 py-24" id="contact">
+        <div className="max-w-[1600px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl font-medium text-stone-900 mb-6">
+              Contact
+            </h2>
+            <div className="flex gap-8">
               <a
-                href="https://instagram.com/theresa.kennish"
-                className="text-slate-900 hover:text-green-600 transition-colors"
+                href="mailto:theresa@kennishart.com"
+                className="flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors"
               >
-                @theresa.kennish
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                Email
+              </a>
+              <a
+                href="https://instagram.com"
+                className="flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
+                  />
+                  <rect
+                    x="2"
+                    y="2"
+                    width="20"
+                    height="20"
+                    rx="5"
+                    ry="5"
+                    strokeWidth={1.5}
+                  />
+                </svg>
+                Instagram
               </a>
             </div>
-            <div>
-              <p className="text-xs uppercase tracking-widest text-green-600 font-semibold mb-3">Location</p>
-              <p className="text-slate-900">Portland, OR</p>
-            </div>
           </div>
-          <div className="pt-8 border-t border-green-200 text-center text-xs text-slate-500">
-            © 2025 Theresa Kennish Art. Photography & contemporary art.
-          </div>
+          <p className="text-stone-400 text-sm">© 2025 Theresa Kennish</p>
         </div>
       </footer>
     </div>
-  )
+  );
 }

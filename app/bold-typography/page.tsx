@@ -1,154 +1,277 @@
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 
 export default function BoldTypography() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900" style={{ fontFamily: "Playfair Display, serif" }}>
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-amber-200 selection:text-black">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-slate-50 border-b border-slate-200">
-        <div className="max-w-6xl mx-auto px-8 py-6 flex items-center justify-between">
-          <h1 className="text-2xl font-black uppercase tracking-tighter">Theresa Kennish</h1>
-          <div className="flex items-center gap-12">
-            <a
-              href="#work"
-              className="text-xs uppercase font-bold tracking-widest text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Work
-            </a>
-            <a
-              href="#gallery"
-              className="text-xs uppercase font-bold tracking-widest text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Gallery
-            </a>
-            <a
-              href="#contact"
-              className="text-xs uppercase font-bold tracking-widest text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Contact
-            </a>
-          </div>
-          <Link href="/" className="text-sm text-slate-400 hover:text-slate-600 transition-colors">
-            Back
-          </Link>
+      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 py-6 mix-blend-difference text-white">
+        <Link href="/" className="text-2xl font-black tracking-tighter">
+          THERESA KENNISH
+        </Link>
+        <div className="hidden md:flex gap-12 font-bold text-sm tracking-widest uppercase">
+          <a
+            href="#current"
+            className="hover:underline underline-offset-4 decoration-2"
+          >
+            Current
+          </a>
+          <a
+            href="#portfolio"
+            className="hover:underline underline-offset-4 decoration-2"
+          >
+            Portfolio
+          </a>
+          <a
+            href="#contact"
+            className="hover:underline underline-offset-4 decoration-2"
+          >
+            Contact
+          </a>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="h-screen flex items-center">
-        <div className="w-full max-w-6xl mx-auto px-8 grid grid-cols-3 gap-16 items-center">
-          {/* Left: Smaller Circular Profile Image */}
-          <div className="flex justify-center">
-            <div className="w-56 h-56 rounded-full bg-slate-200 flex items-center justify-center">
-              <svg className="w-28 h-28 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
-                <circle cx="12" cy="8" r="4" />
-                <path d="M12 14c-6 0-8 3-8 3v6h16v-6s-2-3-8-3z" />
-              </svg>
-            </div>
-          </div>
+      <section className="min-h-screen flex flex-col justify-center px-8 pt-24 pb-12 relative overflow-hidden">
+        <div className="max-w-[1800px] mx-auto w-full relative z-10">
+          <h1
+            className="text-[12vw] leading-[0.85] font-black tracking-tighter text-slate-900 mb-12"
+            style={{ fontFamily: "Playfair Display, serif" }}
+          >
+            THERESA
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
+              KENNISH
+            </span>
+          </h1>
 
-          {/* Right: Typography-Dominant Content */}
-          <div className="col-span-2 space-y-6">
-            <div>
-              <div className="w-2 h-20 bg-slate-900 mb-8" />
-              <h1 className="text-7xl font-black leading-tight uppercase tracking-tighter">Theresa Kennish</h1>
-            </div>
-            <p className="text-xl text-slate-600 font-bold uppercase tracking-wide">Contemporary Mixed Media Artist</p>
-
-            <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mt-8">
-              Theresa explores the intersection of traditional techniques and digital innovation, creating immersive
-              experiences that challenge perceptions of space and form. Her work has been featured in galleries across
-              the Pacific Northwest.
+          <div className="flex flex-col md:flex-row items-end justify-between gap-12 border-t-4 border-slate-900 pt-8">
+            <p className="text-xl md:text-2xl font-bold max-w-xl leading-tight">
+              Oil on Canvas artist exploring the intersection of digital
+              precision and organic chaos.
             </p>
-
-            <button className="mt-8 px-8 py-3 bg-slate-900 text-white font-black uppercase tracking-wider hover:bg-slate-800 transition-colors">
-              View Current Work
-            </button>
+            <a
+              href="#portfolio"
+              className="inline-flex items-center justify-center w-48 h-16 bg-slate-900 text-white font-bold tracking-widest uppercase hover:bg-blue-600 transition-colors"
+            >
+              View Work
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Current Work Section */}
-      <section className="max-w-6xl mx-auto px-8 py-24 border-t border-slate-200" id="work">
-        <h3 className="text-5xl font-black uppercase tracking-tighter mb-16 text-slate-900">Now</h3>
-        <div className="grid grid-cols-2 gap-16">
-          <div className="bg-slate-200 aspect-square flex items-end justify-start p-8">
-            <div className="w-full h-32 bg-slate-400" />
-          </div>
-          <div className="flex flex-col justify-center">
-            <h4 className="text-4xl font-bold mb-6 uppercase tracking-tight">Monochrome Study</h4>
-            <p className="text-lg text-slate-600 leading-relaxed mb-8">
-              A deep dive into form, shadow, and the power of singular chromatic exploration. Typography becomes form.
-              Silence becomes substance.
-            </p>
-            <div className="flex gap-12">
+      {/* Current Series Section */}
+      <section id="current" className="py-32 border-t border-slate-200">
+        <div className="max-w-[1800px] mx-auto px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div className="relative aspect-square bg-slate-100">
+              <Image
+                src="/artwork/surf2.JPG"
+                alt="Current Series Feature"
+                fill
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              />
+            </div>
+            <div className="space-y-12">
               <div>
-                <p className="text-3xl font-black text-slate-900">08</p>
-                <p className="text-xs uppercase tracking-widest text-slate-500 font-bold">Installations</p>
+                <span className="block text-sm font-black tracking-widest uppercase mb-4 text-blue-600">
+                  Current Series
+                </span>
+                <h2
+                  className="text-6xl md:text-7xl font-black tracking-tighter mb-8"
+                  style={{ fontFamily: "Playfair Display, serif" }}
+                >
+                  COASTAL RHYTHMS
+                </h2>
+                <p className="text-xl font-medium leading-relaxed text-slate-600 max-w-lg">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
               </div>
-              <div>
-                <p className="text-3xl font-black text-slate-900">2024</p>
-                <p className="text-xs uppercase tracking-widest text-slate-500 font-bold">Current Year</p>
-              </div>
+              <Link
+                href="/series/coastal-rhythms"
+                className="inline-block border-b-4 border-slate-900 pb-2 text-2xl font-bold hover:text-blue-600 hover:border-blue-600 transition-colors"
+              >
+                Explore Series
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section className="max-w-6xl mx-auto px-8 py-24 border-t border-slate-200" id="gallery">
-        <div className="mb-16">
-          <h3 className="text-5xl font-black uppercase tracking-tighter mb-4 text-slate-900">Archive</h3>
-          <p className="text-slate-600 text-sm leading-relaxed max-w-2xl">
-            Explore my past works and click to view series. Each archive entry represents a significant chapter in my
-            artistic practice.
-          </p>
-        </div>
-        <div className="space-y-8">
-          <div className="grid grid-cols-3 gap-8">
-            <div className="aspect-square bg-slate-300" />
-            <div className="aspect-square bg-slate-200" />
-            <div className="aspect-square bg-slate-400" />
-          </div>
-          <div className="grid grid-cols-2 gap-8">
-            <div className="aspect-square bg-slate-250" />
-            <div className="aspect-square bg-slate-300" />
+      {/* Portfolio Section (Renamed from Series) */}
+      <section className="py-32 bg-slate-50" id="portfolio">
+        <div className="max-w-[1800px] mx-auto px-8">
+          <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-slate-200 mb-24 text-center md:text-left">
+            PORTFOLIO
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Series Card 1 */}
+            <Link
+              href="/series/oceanic-horizons"
+              className="group relative block h-[600px] bg-white border border-slate-200 hover:border-blue-600 transition-colors duration-500 overflow-hidden"
+            >
+              <div className="absolute inset-0 p-8 flex flex-col justify-between z-20">
+                <span className="text-sm font-bold tracking-widest uppercase text-slate-900 group-hover:text-white transition-colors">
+                  01 / Digital
+                </span>
+                <div>
+                  <h3
+                    className="text-4xl font-black tracking-tighter mb-2 text-slate-900 group-hover:text-white transition-colors"
+                    style={{ fontFamily: "Playfair Display, serif" }}
+                  >
+                    OCEANIC HORIZONS
+                  </h3>
+                  <p className="font-bold text-slate-500 group-hover:text-white/80 transition-colors">
+                    Oceanic Horizons
+                  </p>
+                </div>
+              </div>
+              <Image
+                src="/artwork/minimal_geometric.png"
+                alt="Oceanic Horizons"
+                fill
+                className="object-cover opacity-100 group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-blue-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-multiply" />
+            </Link>
+
+            {/* Series Card 2 */}
+            <Link
+              href="/series/coastal-rhythms"
+              className="group relative block h-[600px] bg-white border border-slate-200 hover:border-blue-600 transition-colors duration-500 overflow-hidden lg:translate-y-24"
+            >
+              <div className="absolute inset-0 p-8 flex flex-col justify-between z-20">
+                <span className="text-sm font-bold tracking-widest uppercase text-slate-900 group-hover:text-white transition-colors">
+                  02 / Oil
+                </span>
+                <div>
+                  <h3
+                    className="text-4xl font-black tracking-tighter mb-2 text-slate-900 group-hover:text-white transition-colors"
+                    style={{ fontFamily: "Playfair Display, serif" }}
+                  >
+                    COASTAL RHYTHMS
+                  </h3>
+                  <p className="font-bold text-slate-500 group-hover:text-white/80 transition-colors">
+                    2023 Collection
+                  </p>
+                </div>
+              </div>
+              <Image
+                src="/artwork/surf1.JPG"
+                alt="Coastal Rhythms"
+                fill
+                className="object-cover opacity-100 group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-blue-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-multiply" />
+            </Link>
+
+            {/* Series Card 3 */}
+            <Link
+              href="/series/urban-echoes"
+              className="group relative block h-[600px] bg-white border border-slate-200 hover:border-blue-600 transition-colors duration-500 overflow-hidden"
+            >
+              <div className="absolute inset-0 p-8 flex flex-col justify-between z-20">
+                <span className="text-sm font-bold tracking-widest uppercase text-slate-900 group-hover:text-white transition-colors">
+                  03 / Photo
+                </span>
+                <div>
+                  <h3
+                    className="text-4xl font-black tracking-tighter mb-2 text-slate-900 group-hover:text-white transition-colors"
+                    style={{ fontFamily: "Playfair Display, serif" }}
+                  >
+                    URBAN ECHOES
+                  </h3>
+                  <p className="font-bold text-slate-500 group-hover:text-white/80 transition-colors">
+                    2022 Collection
+                  </p>
+                </div>
+              </div>
+              <Image
+                src="/artwork/ocean_city.jpg"
+                alt="Urban Echoes"
+                fill
+                className="object-cover opacity-100 group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-blue-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-multiply" />
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 bg-slate-900 text-white" id="contact">
-        <div className="max-w-6xl mx-auto px-8 py-16">
-          <div className="mb-12">
-            <div className="w-2 h-12 bg-white mb-8" />
-            <p className="text-5xl font-black uppercase tracking-tighter mb-8">Let's Talk</p>
-          </div>
-          <div className="grid grid-cols-3 gap-8 mb-12">
-            <div>
-              <p className="text-xs uppercase tracking-widest font-bold text-gray-400 mb-3">Email</p>
-              <a href="mailto:theresa@kennishart.com" className="text-white hover:text-gray-300 transition-colors">
+      <footer className="bg-slate-900 text-white py-24" id="contact">
+        <div className="max-w-[1800px] mx-auto px-8 flex flex-col md:flex-row justify-between items-start gap-12">
+          <div>
+            <h2
+              className="text-4xl font-black tracking-tighter mb-8"
+              style={{ fontFamily: "Playfair Display, serif" }}
+            >
+              CONTACT
+            </h2>
+            <div className="space-y-4">
+              <a
+                href="mailto:theresa@kennishart.com"
+                className="flex items-center gap-4 text-xl font-bold hover:text-blue-400 transition-colors"
+              >
+                <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
                 theresa@kennishart.com
               </a>
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-widest font-bold text-gray-400 mb-3">Follow</p>
               <a
-                href="https://instagram.com/theresa.kennish"
-                className="text-white hover:text-gray-300 transition-colors"
+                href="https://instagram.com"
+                className="flex items-center gap-4 text-xl font-bold hover:text-blue-400 transition-colors"
               >
-                @theresa.kennish
+                <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
+                    />
+                    <rect
+                      x="2"
+                      y="2"
+                      width="20"
+                      height="20"
+                      rx="5"
+                      ry="5"
+                      strokeWidth={2}
+                    />
+                  </svg>
+                </div>
+                @theresakennish
               </a>
             </div>
-            <div>
-              <p className="text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">Based</p>
-              <p className="text-white">Los Angeles, CA</p>
-            </div>
           </div>
-          <div className="pt-8 border-t border-slate-700 text-xs uppercase tracking-widest text-gray-400 font-bold">
-            © 2025 Theresa Kennish Art. All work is protected.
+          <div className="text-right self-end">
+            <p className="text-sm font-bold tracking-widest text-slate-500 uppercase">
+              © 2025 Theresa Kennish
+            </p>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
