@@ -5,7 +5,7 @@ export default function ImmersiveScroll() {
   return (
     <div className="min-h-screen bg-white text-slate-900 font-serif overflow-x-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-black/10 backdrop-blur-md border-b border-white/10 text-white px-8 py-6 flex justify-between items-center transition-all duration-300">
+      <nav className="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference text-white">
         <Link
           href="/"
           className="text-2xl italic font-bold tracking-tight drop-shadow-md"
@@ -134,7 +134,7 @@ export default function ImmersiveScroll() {
             >
               <div className="md:col-span-7 relative aspect-video overflow-hidden rounded-lg">
                 <Image
-                  src="/artwork/minimal_geometric.png"
+                  src="/artwork/generated/Generated Image November 21, 2025 - 3_57PM.png"
                   alt="Oceanic Horizons"
                   fill
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -169,9 +169,9 @@ export default function ImmersiveScroll() {
                   Capturing the raw energy of the Pacific coast.
                 </p>
               </div>
-              <div className="md:col-span-7 relative aspect-video overflow-hidden rounded-lg order-1 md:order-2">
+              <div className="md:col-span-7 relative aspect-[3/4] overflow-hidden rounded-lg order-1 md:order-2">
                 <Image
-                  src="/artwork/surf2.JPG"
+                  src="/artwork/generated/Generated Image November 21, 2025 - 3_58PM.png"
                   alt="Coastal Rhythms"
                   fill
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -184,9 +184,9 @@ export default function ImmersiveScroll() {
               href="/series/urban-echoes"
               className="group grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
             >
-              <div className="md:col-span-7 relative aspect-video overflow-hidden rounded-lg">
+              <div className="md:col-span-7 relative aspect-square overflow-hidden rounded-lg">
                 <Image
-                  src="/artwork/ocean_city.jpg"
+                  src="/artwork/generated/Generated Image November 21, 2025 - 3_59PM.png"
                   alt="Urban Echoes"
                   fill
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -209,7 +209,7 @@ export default function ImmersiveScroll() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-white py-32" id="contact">
+      <footer className="bg-slate-100 text-slate-900 py-32" id="contact">
         <div className="max-w-4xl mx-auto px-8 text-center space-y-12">
           <h2 className="text-5xl md:text-6xl font-black tracking-tight">
             Let's Connect

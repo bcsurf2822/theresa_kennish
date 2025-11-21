@@ -44,7 +44,7 @@ export default function SoftArtistic() {
         </div>
 
         <div className="relative z-10 text-center space-y-8 max-w-3xl px-6 animate-in fade-in duration-1000 slide-in-from-bottom-8">
-          <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg mb-8 relative">
+          <div className="w-64 h-64 mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg mb-8 relative">
             <Image
               src="/personal/in_studio.png"
               alt="Theresa Kennish"
@@ -140,7 +140,7 @@ export default function SoftArtistic() {
           >
             <div className="aspect-square relative overflow-hidden rounded-2xl bg-slate-100">
               <Image
-                src="/artwork/minimal_geometric.png"
+                src="/artwork/generated/Generated Image November 21, 2025 - 3_56PM (1).png"
                 alt="Oceanic Horizons"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -160,9 +160,9 @@ export default function SoftArtistic() {
             href="/series/coastal-rhythms"
             className="group block space-y-6 cursor-pointer md:-translate-y-12"
           >
-            <div className="aspect-square relative overflow-hidden rounded-2xl bg-slate-100 shadow-lg">
+            <div className="aspect-video relative overflow-hidden rounded-2xl bg-slate-100 shadow-lg">
               <Image
-                src="/artwork/surf1.JPG"
+                src="/artwork/generated/Generated Image November 21, 2025 - 3_57PM.png"
                 alt="Coastal Rhythms"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -182,9 +182,9 @@ export default function SoftArtistic() {
             href="/series/urban-echoes"
             className="group block space-y-6 cursor-pointer"
           >
-            <div className="aspect-square relative overflow-hidden rounded-2xl bg-slate-100">
+            <div className="aspect-[3/4] relative overflow-hidden rounded-2xl bg-slate-100">
               <Image
-                src="/artwork/ocean_city.jpg"
+                src="/artwork/generated/Generated Image November 21, 2025 - 3_58PM.png"
                 alt="Urban Echoes"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"

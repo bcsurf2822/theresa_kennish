@@ -131,9 +131,9 @@ export default function GalleryFocus() {
             href="/series/coastal-rhythms"
             className="group block cursor-pointer"
           >
-            <div className="aspect-[4/5] relative overflow-hidden bg-stone-100 mb-6">
+            <div className="aspect-[3/4] relative overflow-hidden bg-stone-100 mb-6">
               <Image
-                src="/artwork/surf1.JPG"
+                src="/artwork/surf2.JPG"
                 alt="Coastal Rhythms"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -150,9 +150,9 @@ export default function GalleryFocus() {
             href="/series/oceanic-horizons"
             className="group block cursor-pointer"
           >
-            <div className="aspect-[4/5] relative overflow-hidden bg-stone-100 mb-6">
+            <div className="aspect-square relative overflow-hidden bg-stone-100 mb-6">
               <Image
-                src="/artwork/minimal_geometric.png"
+                src="/artwork/generated/Generated Image November 21, 2025 - 3_57PM.png"
                 alt="Oceanic Horizons"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -169,9 +169,9 @@ export default function GalleryFocus() {
             href="/series/urban-echoes"
             className="group block cursor-pointer"
           >
-            <div className="aspect-[4/5] relative overflow-hidden bg-stone-100 mb-6">
+            <div className="aspect-video relative overflow-hidden bg-stone-100 mb-6">
               <Image
-                src="/artwork/ocean_city.jpg"
+                src="/artwork/generated/Generated Image November 21, 2025 - 3_56PM (1).png"
                 alt="Urban Echoes"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

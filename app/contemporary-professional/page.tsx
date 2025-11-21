@@ -74,7 +74,7 @@ export default function ContemporaryProfessional() {
           </div>
           <div className="relative aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-slate-200">
             <Image
-              src="/artwork/minimal_geometric.png"
+              src="/artwork/surf2.JPG"
               alt="Theresa Kennish Art"
               fill
               className="object-cover"
@@ -136,11 +136,11 @@ export default function ContemporaryProfessional() {
           {/* Series Card 1 */}
           <Link
             href="/series/oceanic-horizons"
-            className="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-slate-100"
+            className="group block transition-all"
           >
-            <div className="relative aspect-[4/3]">
+            <div className="relative aspect-square rounded-xl overflow-hidden shadow-sm group-hover:shadow-md">
               <Image
-                src="/artwork/minimal_geometric.png"
+                src="/artwork/generated/Generated Image November 21, 2025 - 3_58PM.png"
                 alt="Oceanic Horizons"
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -157,11 +157,11 @@ export default function ContemporaryProfessional() {
           {/* Series Card 2 */}
           <Link
             href="/series/coastal-rhythms"
-            className="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-slate-100"
+            className="group block transition-all"
           >
-            <div className="relative aspect-[4/3]">
+            <div className="relative aspect-video rounded-xl overflow-hidden shadow-sm group-hover:shadow-md">
               <Image
-                src="/artwork/surf1.JPG"
+                src="/artwork/ocean_city.jpg"
                 alt="Coastal Rhythms"
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -178,11 +178,11 @@ export default function ContemporaryProfessional() {
           {/* Series Card 3 */}
           <Link
             href="/series/urban-echoes"
-            className="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-slate-100"
+            className="group block transition-all"
           >
-            <div className="relative aspect-[4/3]">
+            <div className="relative aspect-[3/4] rounded-xl overflow-hidden shadow-sm group-hover:shadow-md">
               <Image
-                src="/artwork/ocean_city.jpg"
+                src="/artwork/row1.jpg"
                 alt="Urban Echoes"
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"

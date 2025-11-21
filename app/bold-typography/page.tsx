@@ -69,7 +69,7 @@ export default function BoldTypography() {
                 src="/artwork/surf2.JPG"
                 alt="Current Series Feature"
                 fill
-                className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="object-cover transition-all duration-700"
               />
             </div>
             <div className="space-y-12">
@@ -104,105 +104,102 @@ export default function BoldTypography() {
       {/* Portfolio Section (Renamed from Series) */}
       <section className="py-32 bg-slate-50" id="portfolio">
         <div className="max-w-[1800px] mx-auto px-8">
-          <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-slate-200 mb-24 text-center md:text-left">
+          <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-slate-900 mb-24 text-center md:text-left">
             PORTFOLIO
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Series Card 1 */}
             <Link
               href="/series/oceanic-horizons"
-              className="group relative block h-[600px] bg-white border border-slate-200 hover:border-blue-600 transition-colors duration-500 overflow-hidden"
+              className="group block w-full bg-white border border-slate-200 hover:border-blue-600 transition-colors duration-500 overflow-hidden"
             >
-              <div className="absolute inset-0 p-8 flex flex-col justify-between z-20">
-                <span className="text-sm font-bold tracking-widest uppercase text-slate-900 group-hover:text-white transition-colors">
+              <div className="relative aspect-video w-full overflow-hidden">
+                <Image
+                  src="/artwork/abstract_watercolor.png"
+                  alt="Oceanic Horizons"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+              </div>
+              <div className="p-8 flex flex-col justify-between border-t border-slate-100">
+                <span className="text-sm font-bold tracking-widest uppercase text-blue-600 mb-4 block">
                   01 / Digital
                 </span>
                 <div>
                   <h3
-                    className="text-4xl font-black tracking-tighter mb-2 text-slate-900 group-hover:text-white transition-colors"
+                    className="text-4xl font-black tracking-tighter mb-2 text-slate-900 group-hover:text-blue-600 transition-colors"
                     style={{ fontFamily: "Playfair Display, serif" }}
                   >
                     OCEANIC HORIZONS
                   </h3>
-                  <p className="font-bold text-slate-500 group-hover:text-white/80 transition-colors">
-                    Oceanic Horizons
-                  </p>
+                  <p className="font-bold text-slate-500">Oceanic Horizons</p>
                 </div>
               </div>
-              <Image
-                src="/artwork/minimal_geometric.png"
-                alt="Oceanic Horizons"
-                fill
-                className="object-cover opacity-100 group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-blue-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-multiply" />
             </Link>
 
             {/* Series Card 2 */}
             <Link
               href="/series/coastal-rhythms"
-              className="group relative block h-[600px] bg-white border border-slate-200 hover:border-blue-600 transition-colors duration-500 overflow-hidden lg:translate-y-24"
+              className="group block w-full bg-white border border-slate-200 hover:border-blue-600 transition-colors duration-500 overflow-hidden lg:translate-y-24"
             >
-              <div className="absolute inset-0 p-8 flex flex-col justify-between z-20">
-                <span className="text-sm font-bold tracking-widest uppercase text-slate-900 group-hover:text-white transition-colors">
+              <div className="relative aspect-[3/4] w-full overflow-hidden">
+                <Image
+                  src="/artwork/jetty_ocean.jpg"
+                  alt="Coastal Rhythms"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+              </div>
+              <div className="p-8 flex flex-col justify-between border-t border-slate-100">
+                <span className="text-sm font-bold tracking-widest uppercase text-blue-600 mb-4 block">
                   02 / Oil
                 </span>
                 <div>
                   <h3
-                    className="text-4xl font-black tracking-tighter mb-2 text-slate-900 group-hover:text-white transition-colors"
+                    className="text-4xl font-black tracking-tighter mb-2 text-slate-900 group-hover:text-blue-600 transition-colors"
                     style={{ fontFamily: "Playfair Display, serif" }}
                   >
                     COASTAL RHYTHMS
                   </h3>
-                  <p className="font-bold text-slate-500 group-hover:text-white/80 transition-colors">
-                    2023 Collection
-                  </p>
+                  <p className="font-bold text-slate-500">2023 Collection</p>
                 </div>
               </div>
-              <Image
-                src="/artwork/surf1.JPG"
-                alt="Coastal Rhythms"
-                fill
-                className="object-cover opacity-100 group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-blue-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-multiply" />
             </Link>
 
             {/* Series Card 3 */}
             <Link
               href="/series/urban-echoes"
-              className="group relative block h-[600px] bg-white border border-slate-200 hover:border-blue-600 transition-colors duration-500 overflow-hidden"
+              className="group block w-full bg-white border border-slate-200 hover:border-blue-600 transition-colors duration-500 overflow-hidden"
             >
-              <div className="absolute inset-0 p-8 flex flex-col justify-between z-20">
-                <span className="text-sm font-bold tracking-widest uppercase text-slate-900 group-hover:text-white transition-colors">
+              <div className="relative aspect-square w-full overflow-hidden">
+                <Image
+                  src="/artwork/beach1.png"
+                  alt="Urban Echoes"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+              </div>
+              <div className="p-8 flex flex-col justify-between border-t border-slate-100">
+                <span className="text-sm font-bold tracking-widest uppercase text-blue-600 mb-4 block">
                   03 / Photo
                 </span>
                 <div>
                   <h3
-                    className="text-4xl font-black tracking-tighter mb-2 text-slate-900 group-hover:text-white transition-colors"
+                    className="text-4xl font-black tracking-tighter mb-2 text-slate-900 group-hover:text-blue-600 transition-colors"
                     style={{ fontFamily: "Playfair Display, serif" }}
                   >
                     URBAN ECHOES
                   </h3>
-                  <p className="font-bold text-slate-500 group-hover:text-white/80 transition-colors">
-                    2022 Collection
-                  </p>
+                  <p className="font-bold text-slate-500">2022 Collection</p>
                 </div>
               </div>
-              <Image
-                src="/artwork/ocean_city.jpg"
-                alt="Urban Echoes"
-                fill
-                className="object-cover opacity-100 group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-blue-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-multiply" />
             </Link>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-white py-24" id="contact">
+      <footer className="bg-slate-100 text-slate-900 py-24" id="contact">
         <div className="max-w-[1800px] mx-auto px-8 flex flex-col md:flex-row justify-between items-start gap-12">
           <div>
             <h2
