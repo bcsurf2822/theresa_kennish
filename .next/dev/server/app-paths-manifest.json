@@ -1,0 +1,5 @@
+{
+  "/contemporary-professional/page": "app/contemporary-professional/page.js",
+  "/page": "app/page.js",
+  "/series/[slug]/page": "app/series/[slug]/page.js"
+}

@@ -1,0 +1,10 @@
+var R=require("../../../chunks/[turbopack]_runtime.js")("server/app/api/series/route.js")
+R.c("server/chunks/bd9be__pnpm_2994235d._.js")
+R.c("server/chunks/1d8c0_next_469f4932._.js")
+R.c("server/chunks/c9e09_rxjs_dist_cjs_23426208._.js")
+R.c("server/chunks/e96d6_@sanity_client_dist_e086aaa2._.js")
+R.c("server/chunks/bd9be__pnpm_9677572e._.js")
+R.c("server/chunks/[root-of-the-server]__5314d91e._.js")
+R.c("server/chunks/6e84a_theresa_kennish__next-internal_server_app_api_series_route_actions_a3c69883.js")
+R.m("[project]/code/cedesigns/theresa_kennish/node_modules/.pnpm/next@16.0.0_@babel+core@7.28.5_babel-plugin-react-compiler@1.0.0_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/code/cedesigns/theresa_kennish/app/api/series/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)")
+module.exports=R.m("[project]/code/cedesigns/theresa_kennish/node_modules/.pnpm/next@16.0.0_@babel+core@7.28.5_babel-plugin-react-compiler@1.0.0_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/code/cedesigns/theresa_kennish/app/api/series/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)").exports

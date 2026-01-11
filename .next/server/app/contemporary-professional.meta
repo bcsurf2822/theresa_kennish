@@ -1,0 +1,14 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/contemporary-professional/layout,_N_T_/contemporary-professional/page,_N_T_/contemporary-professional"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/contemporary-professional/__PAGE__",
+    "/contemporary-professional",
+    "/_index"
+  ]
+}

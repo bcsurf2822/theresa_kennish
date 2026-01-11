@@ -1,0 +1,23 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/admin/page": "/admin",
+  "/api/about/route": "/api/about",
+  "/api/artworks/[id]/route": "/api/artworks/[id]",
+  "/api/artworks/homepage/route": "/api/artworks/homepage",
+  "/api/artworks/route": "/api/artworks",
+  "/api/artworks/series/[slug]/route": "/api/artworks/series/[slug]",
+  "/api/auth/[...nextauth]/route": "/api/auth/[...nextauth]",
+  "/api/comments/[id]/route": "/api/comments/[id]",
+  "/api/comments/route": "/api/comments",
+  "/api/series/[slug]/route": "/api/series/[slug]",
+  "/api/series/route": "/api/series",
+  "/architectural-grid/page": "/architectural-grid",
+  "/contemporary-professional/page": "/contemporary-professional",
+  "/immersive-scroll/page": "/immersive-scroll",
+  "/login/page": "/login",
+  "/page": "/",
+  "/series/[slug]/page": "/series/[slug]",
+  "/studio/[[...tool]]/page": "/studio/[[...tool]]",
+  "/style-guide/page": "/style-guide"
+}

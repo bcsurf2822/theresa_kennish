@@ -1,7 +1,70 @@
 import Image from "next/image";
 import Link from "next/link";
+import { client } from "@/sanity/client";
 
-export default function ContemporaryProfessional() {
+interface Series {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  description: string;
+  coverImage: string | null;
+  order: number;
+}
+
+interface About {
+  _id: string;
+  profileImage: string | null;
+  bio: Array<{ children: Array<{ text: string }> }>;
+  secondaryTitle: string;
+  secondaryAbout: Array<{ children: Array<{ text: string }> }>;
+  secondaryImage: string | null;
+}
+
+const SERIES_QUERY = `*[_type == "series"] | order(order asc) {
+  _id,
+  title,
+  slug,
+  description,
+  "coverImage": coverImage.asset->url,
+  order
+}`;
+
+const ABOUT_QUERY = `*[_type == "about"][0] {
+  _id,
+  "profileImage": profileImage.asset->url,
+  bio,
+  secondaryTitle,
+  secondaryAbout,
+  "secondaryImage": secondaryImage.asset->url
+}`;
+
+async function getSeries(): Promise<Series[]> {
+  return client.fetch(SERIES_QUERY);
+}
+
+async function getAbout(): Promise<About | null> {
+  return client.fetch(ABOUT_QUERY);
+}
+
+// Helper function to extract text from Portable Text
+function extractText(blocks: Array<{ children: Array<{ text: string }> }> | undefined): string {
+  if (!blocks || !Array.isArray(blocks)) return "";
+  return blocks
+    .map((block) =>
+      block.children?.map((child) => child.text).join("") || ""
+    )
+    .join("\n");
+}
+
+export default async function ContemporaryProfessional() {
+  const [series, about] = await Promise.all([getSeries(), getAbout()]);
+
+  // Get the first series as "current series" for featured section
+  const currentSeries = series.length > 0 ? series[0] : null;
+
+  // Get bio text
+  const bioText = about ? extractText(about.bio) : "Welcome to the portfolio of Theresa Kennish.";
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
       {/* Navigation */}
@@ -31,7 +94,7 @@ export default function ContemporaryProfessional() {
                 href="#process"
                 className="hover:text-indigo-600 transition-colors"
               >
-                Process
+                My Approach
               </a>
             </div>
           </div>
@@ -44,7 +107,7 @@ export default function ContemporaryProfessional() {
         </div>
       </nav>
 
-      {/* Hero Section (Updated: Generic/Bio focus) */}
+      {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-8 py-24 md:py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
@@ -52,10 +115,7 @@ export default function ContemporaryProfessional() {
               Theresa Kennish
             </h1>
             <p className="text-xl text-slate-600 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              {bioText || "Welcome to the portfolio of Theresa Kennish."}
             </p>
             <div className="flex gap-4">
               <a
@@ -73,57 +133,72 @@ export default function ContemporaryProfessional() {
             </div>
           </div>
           <div className="relative aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-slate-200">
-            <Image
-              src="/artwork/surf2.JPG"
-              alt="Theresa Kennish Art"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Current Series Section (New Distinct Section) */}
-      <section
-        className="bg-white py-24 border-y border-slate-100"
-        id="current"
-      >
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="flex flex-col md:flex-row gap-12 items-center">
-            <div className="w-full md:w-1/2 relative aspect-square rounded-xl overflow-hidden shadow-lg">
+            {about?.profileImage ? (
               <Image
-                src="/artwork/surf1.JPG"
-                alt="Current Series"
+                src={about.profileImage}
+                alt="Theresa Kennish Art"
                 fill
                 className="object-cover"
+                priority
               />
-            </div>
-            <div className="w-full md:w-1/2 space-y-6">
-              <span className="text-indigo-600 font-bold tracking-wide uppercase text-sm">
-                Current Series
-              </span>
-              <h2 className="text-3xl font-bold text-slate-900">
-                Coastal Rhythms
-              </h2>
-              <p className="text-slate-600 leading-relaxed text-lg">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
-              <Link
-                href="/series/coastal-rhythms"
-                className="text-indigo-600 font-medium hover:text-indigo-800 flex items-center gap-2"
-              >
-                View Series <span aria-hidden="true">&rarr;</span>
-              </Link>
-            </div>
+            ) : (
+              <Image
+                src="/artwork/surf2.JPG"
+                alt="Theresa Kennish Art"
+                fill
+                className="object-cover"
+                priority
+              />
+            )}
           </div>
         </div>
       </section>
 
-      {/* Portfolio Section (Renamed from Latest Series) */}
+      {/* Current Series Section */}
+      {currentSeries && (
+        <section
+          className="bg-white py-24 border-y border-slate-100"
+          id="current"
+        >
+          <div className="max-w-7xl mx-auto px-8">
+            <div className="flex flex-col md:flex-row gap-12 items-center">
+              <div className="w-full md:w-1/2 relative aspect-square rounded-xl overflow-hidden shadow-lg bg-slate-200">
+                {currentSeries.coverImage ? (
+                  <Image
+                    src={currentSeries.coverImage}
+                    alt={currentSeries.title}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center text-slate-400">
+                    No Image
+                  </div>
+                )}
+              </div>
+              <div className="w-full md:w-1/2 space-y-6">
+                <span className="text-indigo-600 font-bold tracking-wide uppercase text-sm">
+                  Current Series
+                </span>
+                <h2 className="text-3xl font-bold text-slate-900">
+                  {currentSeries.title}
+                </h2>
+                <p className="text-slate-600 leading-relaxed text-lg">
+                  {currentSeries.description || "Explore this collection of artwork."}
+                </p>
+                <Link
+                  href={`/series/${currentSeries.slug?.current || currentSeries._id}`}
+                  className="text-indigo-600 font-medium hover:text-indigo-800 flex items-center gap-2"
+                >
+                  View Series <span aria-hidden="true">&rarr;</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Portfolio Section */}
       <section className="max-w-7xl mx-auto px-8 py-24" id="portfolio">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-slate-900 mb-4">Portfolio</h2>
@@ -133,97 +208,88 @@ export default function ContemporaryProfessional() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Series Card 1 */}
-          <Link
-            href="/series/oceanic-horizons"
-            className="group block transition-all"
-          >
-            <div className="relative aspect-square rounded-xl overflow-hidden shadow-sm group-hover:shadow-md">
-              <Image
-                src="/artwork/generated/Generated Image November 21, 2025 - 3_58PM.png"
-                alt="Oceanic Horizons"
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+          {series.length > 0 ? (
+            series.map((s) => (
+              <Link
+                key={s._id}
+                href={`/series/${s.slug?.current || s._id}`}
+                className="group block transition-all"
+              >
+                <div className="relative aspect-square rounded-xl overflow-hidden shadow-sm group-hover:shadow-md bg-slate-200">
+                  {s.coverImage ? (
+                    <Image
+                      src={s.coverImage}
+                      alt={s.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-slate-400">
+                      No Image
+                    </div>
+                  )}
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
+                    {s.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm line-clamp-2">
+                    {s.description || "View collection"}
+                  </p>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <div className="col-span-3 text-center py-12 text-slate-500">
+              No series available yet. Add series from the admin dashboard.
             </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
-                Oceanic Horizons
-              </h3>
-              <p className="text-slate-500 text-sm">Oil on Canvas • 2024</p>
-            </div>
-          </Link>
-
-          {/* Series Card 2 */}
-          <Link
-            href="/series/coastal-rhythms"
-            className="group block transition-all"
-          >
-            <div className="relative aspect-video rounded-xl overflow-hidden shadow-sm group-hover:shadow-md">
-              <Image
-                src="/artwork/ocean_city.jpg"
-                alt="Coastal Rhythms"
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
-                Coastal Rhythms
-              </h3>
-              <p className="text-slate-500 text-sm">Oil on Canvas • 2023</p>
-            </div>
-          </Link>
-
-          {/* Series Card 3 */}
-          <Link
-            href="/series/urban-echoes"
-            className="group block transition-all"
-          >
-            <div className="relative aspect-[3/4] rounded-xl overflow-hidden shadow-sm group-hover:shadow-md">
-              <Image
-                src="/artwork/row1.jpg"
-                alt="Urban Echoes"
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
-                Urban Echoes
-              </h3>
-              <p className="text-slate-500 text-sm">Photography • 2022</p>
-            </div>
-          </Link>
+          )}
         </div>
       </section>
 
-      {/* Process Section (Kept as requested) */}
+      {/* Process Section */}
       <section className="bg-slate-900 text-white py-24" id="process">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-6">The Process</h2>
-              <p className="text-slate-300 leading-relaxed mb-6">
-                Every piece begins with a study of light and form. Whether
-                working with oil paints or digital tools, the goal remains the
-                same: to distill complex environments into their essential
-                emotional components.
-              </p>
-              <p className="text-slate-300 leading-relaxed">
-                This approach allows for a fluid transition between mediums,
-                where the texture of a physical brushstroke informs the
-                precision of a digital line.
-              </p>
+              <h2 className="text-3xl font-bold mb-6">My Approach</h2>
+              {about?.secondaryAbout ? (
+                <p className="text-slate-300 leading-relaxed mb-6">
+                  {extractText(about.secondaryAbout)}
+                </p>
+              ) : (
+                <>
+                  <p className="text-slate-300 leading-relaxed mb-6">
+                    Every piece begins with a study of light and form. Whether
+                    working with oil paints or digital tools, the goal remains the
+                    same: to distill complex environments into their essential
+                    emotional components.
+                  </p>
+                  <p className="text-slate-300 leading-relaxed">
+                    This approach allows for a fluid transition between mediums,
+                    where the texture of a physical brushstroke informs the
+                    precision of a digital line.
+                  </p>
+                </>
+              )}
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="aspect-square relative bg-slate-800 rounded-lg overflow-hidden">
-                <Image
-                  src="/artwork/surf1.JPG"
-                  alt="Process 1"
-                  fill
-                  className="object-cover opacity-80"
-                />
+                {about?.secondaryImage ? (
+                  <Image
+                    src={about.secondaryImage}
+                    alt="Process 1"
+                    fill
+                    className="object-cover opacity-80"
+                  />
+                ) : (
+                  <Image
+                    src="/artwork/surf1.JPG"
+                    alt="Process 1"
+                    fill
+                    className="object-cover opacity-80"
+                  />
+                )}
               </div>
               <div className="aspect-square relative bg-slate-800 rounded-lg overflow-hidden translate-y-8">
                 <Image
