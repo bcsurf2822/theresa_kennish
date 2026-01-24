@@ -1,8 +1,71 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Instagram } from "lucide-react";
+import { client } from "@/sanity/client";
 
-export default function ArchitecturalGrid() {
+interface Series {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  description: string;
+  coverImage: string | null;
+  order: number;
+}
+
+interface About {
+  _id: string;
+  profileImage: string | null;
+  bio: Array<{ children: Array<{ text: string }> }>;
+  secondaryTitle: string;
+  secondaryAbout: Array<{ children: Array<{ text: string }> }>;
+  secondaryImage: string | null;
+}
+
+const SERIES_QUERY = `*[_type == "series"] | order(order asc) {
+  _id,
+  title,
+  slug,
+  description,
+  "coverImage": coverImage.asset->url,
+  order
+}`;
+
+const ABOUT_QUERY = `*[_type == "about"][0] {
+  _id,
+  "profileImage": profileImage.asset->url,
+  bio,
+  secondaryTitle,
+  secondaryAbout,
+  "secondaryImage": secondaryImage.asset->url
+}`;
+
+async function getSeries(): Promise<Series[]> {
+  return client.fetch(SERIES_QUERY);
+}
+
+async function getAbout(): Promise<About | null> {
+  return client.fetch(ABOUT_QUERY);
+}
+
+// Helper function to extract text from Portable Text
+function extractText(blocks: Array<{ children: Array<{ text: string }> }> | undefined): string {
+  if (!blocks || !Array.isArray(blocks)) return "";
+  return blocks
+    .map((block) =>
+      block.children?.map((child) => child.text).join("") || ""
+    )
+    .join("\n");
+}
+
+export default async function ArchitecturalGrid() {
+  const [series, about] = await Promise.all([getSeries(), getAbout()]);
+
+  // Get the first series as "current series" for featured section
+  const currentSeries = series.length > 0 ? series[0] : null;
+
+  // Get bio text
+  const bioText = about ? extractText(about.bio) : "";
+
   return (
     <div className="min-h-screen bg-[#FDFCF8] text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900">
       {/* Navigation */}
@@ -47,14 +110,22 @@ export default function ArchitecturalGrid() {
       {/* Hero Section */}
       <section className="pt-40 pb-24 px-6 md:px-12 min-h-[90vh] flex flex-col justify-center relative overflow-hidden z-0">
         {/* Background Art */}
-        {/* Background Art */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-          <Image
-            src="/artwork/beach1.png"
-            alt="Background Texture"
-            fill
-            className="object-cover object-center opacity-50"
-          />
+          {about?.profileImage ? (
+            <Image
+              src={about.profileImage}
+              alt="Background"
+              fill
+              className="object-cover object-center opacity-50"
+            />
+          ) : (
+            <Image
+              src="/artwork/beach1.png"
+              alt="Background Texture"
+              fill
+              className="object-cover object-center opacity-50"
+            />
+          )}
         </div>
 
         <div className="max-w-[1800px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
@@ -67,8 +138,7 @@ export default function ArchitecturalGrid() {
               <span className="text-blue-950 italic">Elegance</span>
             </h1>
             <p className="text-2xl md:text-3xl text-slate-800 max-w-xl leading-relaxed font-medium">
-              Capturing the serene rhythm of the ocean and the structured beauty
-              of the coast.
+              {bioText || "Capturing the serene rhythm of the ocean and the structured beauty of the coast."}
             </p>
             <div className="pt-8">
               <a
@@ -82,59 +152,77 @@ export default function ArchitecturalGrid() {
           <div className="lg:col-span-5 relative aspect-[4/5] animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-200 fill-mode-forwards opacity-0">
             <div className="absolute inset-0 bg-blue-100 rounded-t-[10rem] transform translate-x-4 translate-y-4 -z-10" />
             <div className="relative h-full w-full rounded-t-[10rem] overflow-hidden shadow-2xl">
-              <Image
-                src="/artwork/generated/Generated Image November 21, 2025 - 3_56PM (1).png"
-                alt="Theresa Kennish Hero Art"
-                fill
-                className="object-cover"
-                priority
-              />
+              {currentSeries?.coverImage ? (
+                <Image
+                  src={currentSeries.coverImage}
+                  alt={currentSeries.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              ) : (
+                <Image
+                  src="/artwork/generated/Generated Image November 21, 2025 - 3_56PM (1).png"
+                  alt="Theresa Kennish Hero Art"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              )}
             </div>
           </div>
         </div>
       </section>
 
       {/* Current Series Section */}
-      <section id="current" className="py-32 bg-white">
-        <div className="max-w-[1800px] mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <div className="order-2 lg:order-1 relative aspect-square">
-              <div className="absolute inset-0 bg-slate-50 transform -rotate-3 scale-105" />
-              <div className="relative h-full w-full shadow-xl overflow-hidden">
-                <Image
-                  src="/artwork/jetty_ocean.jpg"
-                  alt="Current Series"
-                  fill
-                  className="object-cover"
-                />
+      {currentSeries && (
+        <section id="current" className="py-32 bg-white">
+          <div className="max-w-[1800px] mx-auto px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+              <div className="order-2 lg:order-1 relative aspect-square">
+                <div className="absolute inset-0 bg-slate-50 transform -rotate-3 scale-105" />
+                <div className="relative h-full w-full shadow-xl overflow-hidden">
+                  {currentSeries.coverImage ? (
+                    <Image
+                      src={currentSeries.coverImage}
+                      alt={currentSeries.title}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <Image
+                      src="/artwork/jetty_ocean.jpg"
+                      alt="Current Series"
+                      fill
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+              </div>
+              <div className="order-1 lg:order-2 space-y-8">
+                <span className="text-blue-900 text-base font-bold tracking-widest uppercase mb-4 block">
+                  Current Series
+                </span>
+                <h2
+                  className="text-5xl md:text-6xl text-slate-900 mb-6 leading-tight"
+                  style={{ fontFamily: "Playfair Display, serif" }}
+                >
+                  {currentSeries.title}
+                </h2>
+                <p className="text-xl text-slate-800 leading-relaxed">
+                  {currentSeries.description || "An exploration of art and form through this unique collection."}
+                </p>
+                <Link
+                  href={`/series/${currentSeries.slug?.current}`}
+                  className="inline-flex items-center gap-3 text-blue-900 font-medium hover:gap-6 transition-all duration-300"
+                >
+                  Explore the Series <span className="text-xl">→</span>
+                </Link>
               </div>
             </div>
-            <div className="order-1 lg:order-2 space-y-8">
-              <span className="text-blue-900 text-base font-bold tracking-widest uppercase mb-4 block">
-                Current Series
-              </span>
-              <h2
-                className="text-5xl md:text-6xl text-slate-900 mb-6 leading-tight"
-                style={{ fontFamily: "Playfair Display, serif" }}
-              >
-                Coastal Rhythms
-              </h2>
-              <p className="text-xl text-slate-800 leading-relaxed">
-                An exploration of the ever-changing dialogue between land and
-                sea. This series focuses on the textures, light, and movement
-                found at the water's edge, inviting the viewer to pause and
-                breathe.
-              </p>
-              <Link
-                href="/series/coastal-rhythms"
-                className="inline-flex items-center gap-3 text-blue-900 font-medium hover:gap-6 transition-all duration-300"
-              >
-                Explore the Series <span className="text-xl">→</span>
-              </Link>
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Portfolio Grid */}
       <section id="portfolio" className="py-32 bg-[#FDFCF8]">
@@ -153,80 +241,45 @@ export default function ArchitecturalGrid() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {/* Card 1 */}
-            <Link
-              href="/series/oceanic-horizons"
-              className="group block space-y-6"
-            >
-              <div className="aspect-[4/5] relative overflow-hidden shadow-md transition-shadow duration-500 group-hover:shadow-2xl">
-                <Image
-                  src="/artwork/generated/Generated Image November 21, 2025 - 3_59PM.png"
-                  alt="Oceanic Horizons"
-                  fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
-              </div>
-              <div className="text-center">
-                <h3
-                  className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-900 transition-colors"
-                  style={{ fontFamily: "Playfair Display, serif" }}
+            {series.length > 0 ? (
+              series.map((s, index) => (
+                <Link
+                  key={s._id}
+                  href={`/series/${s.slug?.current}`}
+                  className={`group block space-y-6 ${index === 1 ? "md:translate-y-16" : ""}`}
                 >
-                  Oceanic Horizons
-                </h3>
-                <p className="text-base text-slate-600 tracking-widest uppercase">
-                  Oil on Canvas
-                </p>
+                  <div className="aspect-[4/5] relative overflow-hidden shadow-md transition-shadow duration-500 group-hover:shadow-2xl">
+                    {s.coverImage ? (
+                      <Image
+                        src={s.coverImage}
+                        alt={s.title}
+                        fill
+                        className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-slate-200 flex items-center justify-center text-slate-400">
+                        No Image
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-center">
+                    <h3
+                      className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-900 transition-colors"
+                      style={{ fontFamily: "Playfair Display, serif" }}
+                    >
+                      {s.title}
+                    </h3>
+                    <p className="text-base text-slate-600 tracking-widest uppercase">
+                      {s.description ? s.description.slice(0, 30) : "View Collection"}
+                    </p>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div className="col-span-3 text-center py-12 text-slate-500">
+                No series available yet. Add series from the admin dashboard.
               </div>
-            </Link>
-
-            {/* Card 2 */}
-            <Link
-              href="/series/coastal-rhythms"
-              className="group block space-y-6 md:translate-y-16"
-            >
-              <div className="aspect-[4/5] relative overflow-hidden shadow-md transition-shadow duration-500 group-hover:shadow-2xl">
-                <Image
-                  src="/artwork/generated/Generated Image November 21, 2025 - 4_02PM.png"
-                  alt="Coastal Rhythms"
-                  fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
-              </div>
-              <div className="text-center">
-                <h3
-                  className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-900 transition-colors"
-                  style={{ fontFamily: "Playfair Display, serif" }}
-                >
-                  Coastal Rhythms
-                </h3>
-                <p className="text-sm text-slate-500 tracking-widest uppercase">
-                  Mixed Media
-                </p>
-              </div>
-            </Link>
-
-            {/* Card 3 */}
-            <Link href="/series/urban-echoes" className="group block space-y-6">
-              <div className="aspect-[4/5] relative overflow-hidden shadow-md transition-shadow duration-500 group-hover:shadow-2xl">
-                <Image
-                  src="/artwork/surf2.JPG"
-                  alt="Urban Echoes"
-                  fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
-              </div>
-              <div className="text-center">
-                <h3
-                  className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-900 transition-colors"
-                  style={{ fontFamily: "Playfair Display, serif" }}
-                >
-                  Urban Echoes
-                </h3>
-                <p className="text-sm text-slate-500 tracking-widest uppercase">
-                  Photography
-                </p>
-              </div>
-            </Link>
+            )}
           </div>
         </div>
       </section>
@@ -236,35 +289,47 @@ export default function ArchitecturalGrid() {
         <div className="max-w-[1800px] mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             <div className="lg:col-span-5 relative aspect-[3/4] bg-slate-100">
-              <Image
-                src="/artwork/generated/Generated Image November 21, 2025 - 3_58PM.png"
-                alt="Theresa Kennish Portrait"
-                fill
-                className="object-cover opacity-90"
-              />
+              {about?.secondaryImage ? (
+                <Image
+                  src={about.secondaryImage}
+                  alt="Theresa Kennish Portrait"
+                  fill
+                  className="object-cover opacity-90"
+                />
+              ) : (
+                <Image
+                  src="/artwork/generated/Generated Image November 21, 2025 - 3_58PM.png"
+                  alt="Theresa Kennish Portrait"
+                  fill
+                  className="object-cover opacity-90"
+                />
+              )}
             </div>
             <div className="lg:col-span-7 space-y-8">
               <h2
                 className="text-5xl md:text-6xl text-slate-900 mb-6 leading-tight"
                 style={{ fontFamily: "Playfair Display, serif" }}
               >
-                "I find peace in the horizon line, where the infinite sky meets
-                the grounded earth."
+                {about?.secondaryTitle || "\"I find peace in the horizon line, where the infinite sky meets the grounded earth.\""}
               </h2>
               <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
-                <p>
-                  Living by the coast has always been my primary source of
-                  inspiration. The daily rhythm of the tides, the shifting light
-                  across the water, and the quiet strength of the dunes all find
-                  their way into my work.
-                </p>
-                <p>
-                  My art is an invitation to slow down. In a world that moves
-                  incredibly fast, I want to create spaces of stillness and
-                  reflection. Whether through the texture of oil paint or the
-                  clarity of a photograph, my goal is to capture the essence of
-                  calm.
-                </p>
+                {about?.secondaryAbout ? (
+                  <p>{extractText(about.secondaryAbout)}</p>
+                ) : (
+                  <>
+                    <p>
+                      Living by the coast has always been my primary source of
+                      inspiration. The daily rhythm of the tides, the shifting light
+                      across the water, and the quiet strength of the dunes all find
+                      their way into my work.
+                    </p>
+                    <p>
+                      My art is an invitation to slow down. In a world that moves
+                      incredibly fast, I want to create spaces of stillness and
+                      reflection.
+                    </p>
+                  </>
+                )}
               </div>
               <div>
                 <Image
@@ -306,7 +371,7 @@ export default function ArchitecturalGrid() {
             </a>
           </div>
           <div className="border-t border-slate-200 pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-400">
-            <p>© 2025 Theresa Kennish Art. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Theresa Kennish Art. All rights reserved.</p>
             <p>Designed with intention in California.</p>
           </div>
         </div>

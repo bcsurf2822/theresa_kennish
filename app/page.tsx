@@ -11,30 +11,6 @@ export default function Home() {
 
   const designs = [
     {
-      id: "soft-artistic",
-      title: "Soft Artistic",
-      description: "",
-      color: "from-cyan-50 to-blue-50",
-      accentColor: "text-cyan-600",
-      previewText: "Soft",
-    },
-    {
-      id: "bold-typography",
-      title: "Bold Typography",
-      description: "",
-      color: "from-slate-50 to-white",
-      accentColor: "text-slate-800",
-      previewText: "Bold",
-    },
-    {
-      id: "gallery-focus",
-      title: "Gallery Focus",
-      description: "",
-      color: "from-green-50 to-emerald-50",
-      accentColor: "text-green-700",
-      previewText: "Gallery",
-    },
-    {
       id: "contemporary-professional",
       title: "Contemporary Professional",
       description: "",
@@ -131,20 +107,6 @@ export default function Home() {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Style Guide Promo */}
-      <section className="max-w-7xl mx-auto px-6 pb-24">
-        <div className="bg-slate-900 rounded-2xl p-12 text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">Swatches</h2>
-
-          <Link
-            href="/style-guide"
-            className="inline-block px-8 py-3 bg-white text-slate-900 font-bold rounded-full hover:bg-slate-100 transition-colors"
-          >
-            View Style Guide
-          </Link>
         </div>
       </section>
 
