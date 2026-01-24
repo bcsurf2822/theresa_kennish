@@ -466,23 +466,18 @@ function CreateSeriesForm({
     <div className="bg-slate-50/50 border border-slate-200 rounded-xl p-6 space-y-4">
       <h4 className="font-medium text-slate-800">Create New Series</h4>
 
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <Label>Title *</Label>
-          <Input
-            value={title}
-            onChange={(e) => handleTitleChange(e.target.value)}
-            placeholder="Series title..."
-          />
-        </div>
-        <div className="space-y-2">
-          <Label>Slug *</Label>
-          <Input
-            value={slug}
-            onChange={(e) => setSlug(e.target.value)}
-            placeholder="series-slug"
-          />
-        </div>
+      <div className="space-y-2">
+        <Label>Title *</Label>
+        <Input
+          value={title}
+          onChange={(e) => handleTitleChange(e.target.value)}
+          placeholder="Series title (e.g., Ocean Paintings)"
+        />
+        {title && (
+          <p className="text-xs text-slate-500">
+            URL: /{slug}
+          </p>
+        )}
       </div>
 
       <div className="space-y-2">
@@ -743,7 +738,7 @@ function UploadArtworkForm({
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("seriesId", seriesId);
+    formData.append("seriesId", seriesId === "none" ? "" : seriesId);
     formData.append("showOnHomepage", showOnHomepage.toString());
     formData.append("order", order);
     formData.append("image", image);
@@ -787,7 +782,7 @@ function UploadArtworkForm({
               <SelectValue placeholder="Select series (optional)" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">No series</SelectItem>
+              <SelectItem value="none">No series</SelectItem>
               {series.map((s) => (
                 <SelectItem key={s._id} value={s._id}>
                   {s.title}

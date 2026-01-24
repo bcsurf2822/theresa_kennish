@@ -91,8 +91,23 @@ export default async function SeriesPage({
         </div>
       </nav>
 
+      {/* Breadcrumb */}
+      <div className="pt-24 px-6 max-w-7xl mx-auto">
+        <nav className="flex items-center gap-2 text-sm text-slate-500">
+          <Link href="/" className="hover:text-slate-900 transition-colors">
+            Home
+          </Link>
+          <span className="text-slate-300">/</span>
+          <Link href="/contemporary-professional" className="hover:text-slate-900 transition-colors">
+            Portfolio
+          </Link>
+          <span className="text-slate-300">/</span>
+          <span className="text-slate-900 font-medium">{series.title}</span>
+        </nav>
+      </div>
+
       {/* Series Header */}
-      <header className="pt-32 pb-16 px-6 max-w-4xl mx-auto text-center">
+      <header className="pt-8 pb-16 px-6 max-w-4xl mx-auto text-center">
         <span className="inline-block px-3 py-1 mb-6 text-xs font-bold tracking-widest uppercase bg-slate-100 rounded-full text-slate-600">
           Series Collection
         </span>

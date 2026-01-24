@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/benjamincorbett/code/cedesigns/theresa_kennish/app/admin/login/layout.tsx"],"sourcesContent":["import { SessionProvider } from \"@/components/providers/session-provider\";\n\nexport default function LoginLayout({\n  children,\n}: {\n  children: React.ReactNode;\n}) {\n  return <SessionProvider>{children}</SessionProvider>;\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS,YAAY,EAClC,QAAQ,EAGT;IACC,qBAAO,qZAAC,0MAAe;kBAAE;;;;;;AAC3B","debugId":null}}]
-}

@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'Theresa-Kennish',
 
-  projectId: 'mcfd2t8i',
+  projectId: '6ho8eufe',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
